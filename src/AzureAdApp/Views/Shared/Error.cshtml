@@ -1,0 +1,11 @@
+﻿@model string
+
+@{
+    ViewBag.Title = "Error";
+    Layout = "_Layout.cshtml";
+}
+
+<div class="jumbotron">
+    @Html.Partial("_ErrorPartial", model: Model)
+</div>
+
