@@ -183,6 +183,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="Utils\AzureHelper.cs" />
     <Compile Include="Utils\AzureServiceException.cs" />
+    <Compile Include="Utils\GlobalExceptionMiddleware.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
