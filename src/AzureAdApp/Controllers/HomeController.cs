@@ -28,6 +28,7 @@ namespace AzureAdApp.Controllers
             return View();
         }
 
+        // Get View with all users table
         [Authorize]
         public async Task<ActionResult> Users()
         {
@@ -47,6 +48,7 @@ namespace AzureAdApp.Controllers
             }                        
         }
 
+        // Get partial view (for modal window) with user roles and groups
         [Authorize]
         public async Task<ActionResult> UserGroups(string userId)
         {

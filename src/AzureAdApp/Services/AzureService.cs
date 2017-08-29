@@ -13,8 +13,15 @@ using Newtonsoft.Json;
 
 namespace AzureAdApp.Services
 {
+    /// <summary>
+    /// Service use Graph API to retrieve data from Azure AD
+    /// </summary>
     public class AzureService
     {
+        /// <summary>
+        /// Get all users
+        /// </summary>
+        /// <returns>List of users with objectId and displayName</returns>
         public async Task<List<AzureUserModel>> GetUsersAsync()
         {
             var uri = AzureHelper.GenerateUsersApiUrl();
@@ -24,6 +31,11 @@ namespace AzureAdApp.Services
             return response != null ? response.Value : new List<AzureUserModel>();
         }
 
+        /// <summary>
+        /// Get user roles and groups
+        /// </summary>
+        /// <param name="userId">User objectId</param>
+        /// <returns>List of groups with objectId, objectType and displayName</returns>
         public async Task<List<AzureMembershipModel>> GetUserGroupsAsync(string userId)
         {
             var uri = AzureHelper.GenerateMemberOfUrl(userId);
@@ -33,6 +45,12 @@ namespace AzureAdApp.Services
             return response != null ? response.Value : new List<AzureMembershipModel>();
         }
 
+        /// <summary>
+        /// Get strong type response from Graph API or throw exception if response not succeeded
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="uri"></param>
+        /// <returns></returns>
         private static async Task<T> GetResponseOrThrowAsync<T>(string uri)
         {
             var baseResponse = await GetBaseResponseAsync(uri);
@@ -53,6 +71,11 @@ namespace AzureAdApp.Services
             }
         }
 
+        /// <summary>
+        /// Get base response from Graph API that contains response string and succeeded flag
+        /// </summary>
+        /// <param name="url"></param>
+        /// <returns></returns>
         private static async Task<AzureServiceBaseResult> GetBaseResponseAsync(string url)
         {
             var client = await GetHttpClientWithAuthHeaderAsync();
@@ -77,6 +100,10 @@ namespace AzureAdApp.Services
             };
         }
 
+        /// <summary>
+        /// Get http client with access token in request header
+        /// </summary>
+        /// <returns></returns>
         private static async Task<HttpClient> GetHttpClientWithAuthHeaderAsync()
         {
             var client = new HttpClient();
@@ -87,6 +114,10 @@ namespace AzureAdApp.Services
             return client;
         }
 
+        /// <summary>
+        /// Get base query string with api version
+        /// </summary>
+        /// <returns></returns>
         private static NameValueCollection GetBaseQueryString()
         {
             var queryString = HttpUtility.ParseQueryString(string.Empty);

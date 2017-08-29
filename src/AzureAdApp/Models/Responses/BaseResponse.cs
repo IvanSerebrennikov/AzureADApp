@@ -5,6 +5,10 @@ using System.Web;
 
 namespace AzureAdApp.Models.Responses
 {
+    /// <summary>
+    /// Base Graph API response where Value is array
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class BaseResponse<T>
     {
         public BaseResponse()

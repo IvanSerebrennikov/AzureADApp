@@ -8,6 +8,9 @@ using Microsoft.IdentityModel.Clients.ActiveDirectory;
 
 namespace AzureAdApp.Utils
 {
+    /// <summary>
+    /// Encapsulate all azure app constants and methods for work with azure variables (like a access token, etc.)
+    /// </summary>
     public static class AzureHelper
     {
         public static readonly string AppId = ConfigurationManager.AppSettings["AzureAppId"];
@@ -20,16 +23,29 @@ namespace AzureAdApp.Utils
 
         public static readonly string Authority = $"{AzureLoginUrl}/{AppName}";
 
+        /// <summary>
+        /// Generate Graph API url for users method
+        /// </summary>
+        /// <returns></returns>
         public static string GenerateUsersApiUrl()
         {
             return $"{AzureGraphUrl}/{AppName}/users";
         }
 
+        /// <summary>
+        /// Generate Graph API url for memberOf method
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
         public static string GenerateMemberOfUrl(string userId)
         {
             return $"{AzureGraphUrl}/{AppName}/users/{userId}/memberOf";
         }
 
+        /// <summary>
+        /// Get access token for working with Graph API
+        /// </summary>
+        /// <returns>Access token</returns>
         public static async Task<string> GetTokenAsync()
         {
             var credential = new ClientCredential(AppId, AppSecret);

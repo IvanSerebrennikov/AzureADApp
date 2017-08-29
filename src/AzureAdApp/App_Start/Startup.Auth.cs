@@ -12,6 +12,7 @@ namespace AzureAdApp
 {  
     public partial class Startup
     {
+        // OWIN auth configuration
         public void ConfigureAuth(IAppBuilder app)
         {
             app.Use<GlobalExceptionMiddleware>();

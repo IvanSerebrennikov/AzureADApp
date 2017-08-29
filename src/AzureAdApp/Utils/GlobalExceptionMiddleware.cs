@@ -7,6 +7,9 @@ using Microsoft.Owin;
 
 namespace AzureAdApp.Utils
 {
+    /// <summary>
+    /// Middleware that catch all owin exceptions and redirect to /Error with exception message
+    /// </summary>
     public class GlobalExceptionMiddleware : OwinMiddleware
     {
         public GlobalExceptionMiddleware(OwinMiddleware next) : base(next)
