@@ -16,20 +16,32 @@ namespace AzureAdApp.Controllers
     {
         public void SignIn()
         {
-            // TODO: Error handling
-            // Send an OpenID Connect sign-in request.
-            if (!Request.IsAuthenticated)
+            try
             {
-                HttpContext.GetOwinContext().Authentication.Challenge(new AuthenticationProperties { RedirectUri = "/" }, OpenIdConnectAuthenticationDefaults.AuthenticationType);                
+                // Send an OpenID Connect sign in request.
+                if (!Request.IsAuthenticated)
+                {
+                    HttpContext.GetOwinContext().Authentication.Challenge(new AuthenticationProperties { RedirectUri = "/" }, OpenIdConnectAuthenticationDefaults.AuthenticationType);
+                }
             }
+            catch (Exception e)
+            {
+                Response.Redirect("/Error?message=" + e.Message);
+            }           
         }
 
         public void SignOut()
         {
-            // TODO: Error handling
-            // Send an OpenID Connect sign-out request.
-            HttpContext.GetOwinContext().Authentication.SignOut(
-                OpenIdConnectAuthenticationDefaults.AuthenticationType, CookieAuthenticationDefaults.AuthenticationType);
+            try
+            {
+                // Send an OpenID Connect sign out request.
+                HttpContext.GetOwinContext().Authentication.SignOut(
+                    OpenIdConnectAuthenticationDefaults.AuthenticationType, CookieAuthenticationDefaults.AuthenticationType);
+            }
+            catch (Exception e)
+            {
+                Response.Redirect("/Error?message=" + e.Message);
+            }            
         }
     }
 }

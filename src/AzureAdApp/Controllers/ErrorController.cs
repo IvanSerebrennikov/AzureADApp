@@ -10,7 +10,7 @@ namespace AzureAdApp.Controllers
     {
         public ActionResult Index(string message)
         {
-            return View("Error", message);
+            return View("Error", model: message);
         }
     }
 }
