@@ -13,6 +13,8 @@
 
 - No DataBase needed. 
 
+- To build app you need Visual Studio, MS Build or any other tool that can compile c# and build .net apps
+
 - To run app you need paste your Azure AD settings in next Web.config sections: 
 ```xml
  <add key="AzureAppId" value="" />
